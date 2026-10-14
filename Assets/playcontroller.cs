@@ -37,10 +37,15 @@ public class playcontroller : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject Bullet = Instantiate(BulletPrefab);
-            Bullet.transform.position = transform.position;
-            Bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * bulletSpeed);
-          
+            for(int i = 0; i < 3; i++)
+            {
+                GameObject Bullet = Instantiate(BulletPrefab);
+                Vector3 bulletPos = transform.position;
+                bulletPos.y += 0.3f * i;
+                Bullet.transform.position = bulletPos;
+                Bullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * bulletSpeed);
+            }
+            
         }
         
     }
