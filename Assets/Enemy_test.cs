@@ -1,34 +1,53 @@
+
 using UnityEngine;
 
 public class Enemy_test : MonoBehaviour
 {
     float health = 50f;
 
-    private void TakeDamege(int value)
+    public float speed;
+
+    // 체력 읽기 전용 프로퍼티
+    public float Health
+    {
+        get { return health; }
+    }
+
+    // 데미지 처리
+    private void TakeDamage(int value)
     {
         health -= value;
+
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
-
-    public float GetHealth()
+    // 충돌 감지
+    private void OnCollisionEnter2D(Collision2D coll)
     {
-        return health;
+        if (coll.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(10);
+
+            Debug.Log("Health : " + health);
+
+            coll.gameObject.SetActive(false);
+        }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    // 사망 처리
+    void Die()
     {
-        TakeDamege(10);
-        Debug.Log("Health : " + health);
+        Destroy(this.gameObject);
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-
     }
 
-    // Update is called once per frame
     void Update()
     {
-
     }
 }
