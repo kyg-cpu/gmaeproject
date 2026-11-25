@@ -24,8 +24,8 @@ public class Enemy_test : MonoBehaviour
         }
     }
 
-    // 충돌 감지
-    private void OnCollisionEnter2D(Collision2D coll)
+    // 충돌 감지 (물리적인 밀림 없음)
+    private void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.CompareTag("Bullet"))
         {
